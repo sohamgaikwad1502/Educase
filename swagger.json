@@ -1,0 +1,57 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "School Management API",
+    "version": "1.0.0",
+    "description": "API to add schools and list them sorted by distance."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/addSchool": {
+      "post": {
+        "summary": "Add a new school",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string", "example": "Green Valley High" },
+                  "address": { "type": "string", "example": "MG Road, Bengaluru" },
+                  "latitude": { "type": "number", "example": 12.9716 },
+                  "longitude": { "type": "number", "example": 77.5946 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "School created successfully" },
+          "400": { "description": "Invalid input" },
+          "500": { "description": "Server error" }
+        }
+      }
+    },
+    "/listSchools": {
+      "get": {
+        "summary": "List schools by proximity",
+        "parameters": [
+          { "in": "query", "name": "latitude", "required": true, "schema": { "type": "number" }, "example": 12.9716 },
+          { "in": "query", "name": "longitude", "required": true, "schema": { "type": "number" }, "example": 77.5946 },
+          { "in": "query", "name": "limit", "required": false, "schema": { "type": "number" }, "example": 5 }
+        ],
+        "responses": {
+          "200": { "description": "A sorted list of schools" },
+          "400": { "description": "Invalid coordinates" },
+          "500": { "description": "Server error" }
+        }
+      }
+    }
+  }
+}

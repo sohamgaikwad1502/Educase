@@ -5,10 +5,10 @@
     "version": "1.0.0",
     "description": "API to add schools and list them sorted by distance."
   },
-  "servers": [
+    "servers": [
     {
-      "url": "http://localhost:3000",
-      "description": "Local server"
+      "url": "https://educase-wyd2.onrender.com",
+      "description": "Live Render server"
     }
   ],
   "paths": {
